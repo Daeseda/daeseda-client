@@ -88,10 +88,16 @@ const LogoLink = styled(Link)`
   }
 `;
 const Header = () => {
+  const [authorityName, setAuthorityName] = useState(null);
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState(null);
+const [initialName, setInitialName] = useState("");
+const [initialNickname, setInitialNickname] = useState("");
+const [initialPhone, setInitialPhone] = useState("");
 
+ 
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
-
   const linkHandler = (value) => () => {
     navigate(`/${value}`);
   };
@@ -119,10 +125,36 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰을 가져옴
+    const token = localStorage.getItem("token");
     if (token) {
       // 토큰이 존재하는 경우, 로그인 상태로 설정
       setIsLoggedIn(true);
+  
+      // 사용자 정보 가져오기
+      axios
+        .get(`${serverUrl}/users/myInfo`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const userData = response.data;
+          setUser(userData);
+  
+          // 권한 확인
+          if (userData.authorityDtoSet && userData.authorityDtoSet.length > 0) {
+            const authorityName = userData.authorityDtoSet[0].authorityName;
+  
+            // "ROLE_ADMIN" 권한이 있는 경우 authorityName은 "ROLE_ADMIN"이 될 것이므로
+            // 이를 확인하여 관리자인지 판단
+            if (authorityName === "ROLE_ADMIN") {
+              setAuthorityName("ROLE_ADMIN");
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("회원 정보를 불러오는데 실패했습니다.", error);
+        });
     }
   }, []);
   return (
@@ -173,6 +205,14 @@ const Header = () => {
                 <Link to="/login">
                   <NavLink>주문내역</NavLink>
                 </Link>
+              )}
+            </NavItem>
+            <NavItem>
+              {authorityName === "ROLE_ADMIN" && isLoggedIn ? (
+                 
+                  <NavLink onClick={linkHandler("admin")}>관리자</NavLink>
+              ) : (
+                null
               )}
             </NavItem>
             <NavItem>

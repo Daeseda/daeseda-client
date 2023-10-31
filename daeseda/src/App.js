@@ -19,6 +19,7 @@ import QuestionWriteSuccessPage from "./pages/cscenterPage/QuestionWriteSuccessP
 import QuestionUpdatePage from "./pages/cscenterPage/QuestionUpdatePage";
 import QuestionDetailPage from "./pages/cscenterPage/QuestionDetailPage";
 import UserGuidePage from "./pages/userGuidePage/index";
+import AdminPage from "./pages/adminPage/index";
 function App() {
   return (
     <BrowserRouter>
@@ -54,6 +55,7 @@ function App() {
         <Route path="/cscenter/notice/:id" element={<QuestionDetailPage/>} />
         <Route path="/cscenter/faq/:id" element={<QuestionDetailPage/>} />
         <Route path="/userguide" element={<UserGuidePage/>} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );

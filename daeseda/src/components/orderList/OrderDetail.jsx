@@ -10,8 +10,7 @@ function OrderDetail({ order, formatDate }) {
       <Row>
         <RowTitle>배송주소</RowTitle>
         <p>
-          ({order.address.addressZipcode}) {order.address.addressRoad}{" "}
-          {order.address.addressDetail}
+          {order.address}
         </p>
       </Row>
       <Row>

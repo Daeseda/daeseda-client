@@ -79,7 +79,6 @@ function QuestionDetail({ question }) {
 }
 const Main = styled.div`
   gap: 4px;
-  /* margin: 20px; */
   padding-left: 15%;
   padding-right: 15%;
     @media (max-width: 768px) {

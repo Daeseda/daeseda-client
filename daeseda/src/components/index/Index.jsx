@@ -5,13 +5,15 @@ import Coin from "../../assets/images/coin.png";
 import Clean from "../../assets/images/clean.png";
 import Time from "../../assets/images/time.png";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/common/Footer";
+
+
 
 const BoxContainer = styled.div`
   display: flex;
   height: 565px;
   background: linear-gradient(45deg, #5d8df2, black);
   flex-direction: column;
-  align-items: center;
   @media (max-width: 768px) {
     height: 300px;
     background: linear-gradient(45deg, #5d8df2, black);
@@ -20,7 +22,8 @@ const BoxContainer = styled.div`
 `;
 const Background = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  margin: 0 auto;
   margin-top: 100px;
   margin-bottom:100px;
   @media (max-width: 768px) {
@@ -188,6 +191,7 @@ const Index = () => {
           <Review />
         </Content>
       </ReviewWrap>
+      <Footer/>
     </BoxContainer>
   );
 };
