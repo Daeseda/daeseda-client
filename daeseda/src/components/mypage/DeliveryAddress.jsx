@@ -156,6 +156,7 @@ const DeliveryWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+  margin-bottom:5px;
 `;
 const DeliveryAddressLayout = styled.section`
   display: flex;

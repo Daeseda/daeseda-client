@@ -182,7 +182,7 @@ function Reply() {
         댓글 수({replyList.filter((reply) => reply.boardId == id).length}개)
       </ReplyCount>
       {replyList.filter((reply) => reply.boardId == id).length === 0 ? (
-        <p style={{ textAlign: "center", margin: "10px 0" }}>
+        <p style={{margin: "10px" }}>
           작성된 댓글이 없습니다
         </p>
       ) : (

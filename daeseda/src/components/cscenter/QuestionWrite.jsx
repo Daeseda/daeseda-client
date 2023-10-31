@@ -6,14 +6,12 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 20px;
-  max-width:700px;
-
-  @media (max-width: 700px) {
-    width: 95%;
+margin-top:50px;
+padding-left: 15%;
+  padding-right: 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
   }
 `;
 

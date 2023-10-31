@@ -88,6 +88,8 @@ const LogoLink = styled(Link)`
   }
 `;
 const Header = () => {
+
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
 
   const linkHandler = (value) => () => {
@@ -100,7 +102,7 @@ const Header = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .post("http://localhost:8088/users/logout", null, {
+        .post(`${serverUrl}/users/logout`, null, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -126,10 +128,10 @@ const Header = () => {
   return (
     <Container>
       <Navbar>
-        <LogoLink 
+        <LogoLink
           to="/"
           style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-<LogoImage src={Logo} alt="로고" />
+          <LogoImage src={Logo} alt="로고" />
           <p>대신 세탁해드립니다</p>
         </LogoLink>
         <Nav>
@@ -144,16 +146,16 @@ const Header = () => {
               )}
             </NavItem>
             <NavItem>
-              <NavLink>이용방법</NavLink>
+              <Link to="/userguide">
+                <NavLink>이용방법</NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              {isLoggedIn ? (
-                <NavLink onClick={linkHandler("cscenter")}>고객센터</NavLink>
-              ) : (
-                <Link to="/login">
+              
+                <Link to="/cscenter">
                   <NavLink>고객센터</NavLink>
                 </Link>
-              )}
+              
             </NavItem>
             <NavItem>
               {isLoggedIn ? (

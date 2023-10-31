@@ -551,8 +551,12 @@ function Order() {
 const OrderLayout = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 24px 10%;
   gap: 8px;
+  padding:24px 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
+  }
 `;
 
 const Title = styled.p`

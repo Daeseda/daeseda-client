@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Review from "../review/Review";
 import Coin from "../../assets/images/coin.png";
@@ -121,6 +121,17 @@ const ReviewWrap = styled.div`
 `;
 
 const Index = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰을 가져옴
+    if (token) {
+      // 토큰이 존재하는 경우, 로그인 상태로 설정
+      setIsLoggedIn(true);
+    }
+    else{
+      setIsLoggedIn(false);
+    }
+  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
   const navigate = useNavigate();
   return (
     <BoxContainer>
@@ -128,8 +139,12 @@ const Index = () => {
         <Text>대신세탁해드립니다</Text>
         <Text>당신의 편리한 일상 생활을 도와드리겠습니다</Text>
         <ButtonWrap>
-          <Button onClick={() => navigate("laundry")}>신청하기</Button>
-          <Button>이용방법</Button>
+        {isLoggedIn ? (
+                <Button onClick={() => navigate("laundry")}>신청하기</Button>
+              ) : (
+                <Button onClick={() => navigate("login")}>신청하기</Button>
+              )}
+          <Button onClick={() => navigate("userguide")}>이용방법</Button>
         </ButtonWrap>
       </Background>
       <ContentWrap>

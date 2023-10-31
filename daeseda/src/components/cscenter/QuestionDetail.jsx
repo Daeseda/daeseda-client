@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Reply from "./Reply";
+import SmallButton from "../common/SmallButton";
 
 function QuestionDetail({ question }) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -61,7 +63,12 @@ function QuestionDetail({ question }) {
   }
   return (
     <Main>
-      <Title>{title}</Title>
+      <Title>
+        <p>{title}</p>
+        <SmallButton text="목록으로" onClick={()=>{
+          navigate("/cscenter")
+        }}/>
+        </Title>
       {question && 
       <Small>작성자 - {nickname}</Small>}
       <Small>작성일 - {변환날짜시간(date)}</Small>
@@ -71,20 +78,22 @@ function QuestionDetail({ question }) {
   );
 }
 const Main = styled.div`
-  display: flex;
-  flex-direction: column;
   gap: 4px;
-  margin: 20px;
-  max-width:700px;
-
-  @media (max-width: 700px) {
-    width: 95%;
+  /* margin: 20px; */
+  padding-left: 15%;
+  padding-right: 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
   }
 `;
 
 const Title = styled.div`
   border-bottom: solid 1px grey;
   padding: 10px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content: space-between;
 `;
 
 const Content = styled.div`

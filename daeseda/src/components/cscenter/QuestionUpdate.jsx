@@ -3,16 +3,15 @@ import styled from "styled-components";
 import Button from "../common/Button";
 import { useNavigate, useParams } from "react-router-dom"; // useParams 추가
 import axios from "axios";
+import SmallButton from "../common/SmallButton";
 
 const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 20px;
-  max-width:700px;
-
-  @media (max-width: 700px) {
-    width: 95%;
+  margin-top:50px;
+padding-left: 15%;
+  padding-right: 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
   }
   
 `;
@@ -20,6 +19,8 @@ const Main = styled.div`
 const Title = styled.div`
   border-bottom: solid 1px grey;
   padding: 10px;
+  display:flex;
+  justify-content:space-between;
 `;
 
 const Content = styled.div`
@@ -134,7 +135,8 @@ const QuestionUpdate = () => {
   return (
     <Main>
       <Title>
-        <h3>1:1문의</h3>
+        <h3>자유게시판</h3>
+        <SmallButton onClick={()=>{navigate("/myinfo")}} text="목록으로"/>
       </Title>
       <Content>
         <SubTitle>

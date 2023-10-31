@@ -11,6 +11,7 @@ import WarningMessage from "../common/WarningMessage";
 
 const Main = styled.div`
   display: flex;
+  align-items:center;
   flex-direction: column;
   gap: 4px;
 `;
@@ -25,8 +26,9 @@ const Content = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-top: 10px;
-  padding: 10px;
+  padding: 50px;
   width: 400px;
+  border: solid 1px rgb(232, 234, 237);
 `;
 
 const Row = styled.div`

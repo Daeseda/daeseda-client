@@ -100,7 +100,7 @@ const Login = () => {
       <LoginBox>
         <Input
           type="text"
-          placeholder="Email"
+          placeholder="아이디"
           onChange={emailChangeHandler}
           value={email}
           onKeyPress={(e) => {
@@ -111,7 +111,7 @@ const Login = () => {
         />
         <Input
           type="password"
-          placeholder="Password"
+          placeholder="비밀번호"
           onChange={passwordChangeHandler}
           value={password}
           onKeyPress={(e) => {

@@ -48,9 +48,9 @@ const QuestionWriteSuccess = () => {
           </ShowIdBox>
         </IdBox>
         <ButtonBox
-          text={"홈으로"}
+          text={"목록으로"}
           onClick={() => {
-            navigate("/");
+            navigate("/cscenter");
           }}
         ></ButtonBox>
       </ShowIdIndex>

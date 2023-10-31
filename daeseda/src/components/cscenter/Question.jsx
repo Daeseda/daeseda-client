@@ -61,6 +61,14 @@ const BoardRowLayout = styled.div`
 `;
 
 const Question = ({ write, mypage }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰을 가져옴
+    if (token) {
+      // 토큰이 존재하는 경우, 로그인 상태로 설정
+      setIsLoggedIn(true);
+    }
+  }, []);
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const [boardDummy, setBoardDummy] = useState([]);
@@ -205,7 +213,8 @@ const Question = ({ write, mypage }) => {
           <Button
             text={"글 작성하기"}
             onClick={() => {
-              navigate("question-write");
+              if(isLoggedIn) navigate("question-write");
+              else navigate("/login")
             }}
           ></Button>
         </ButtonWrap>

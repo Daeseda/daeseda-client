@@ -184,23 +184,25 @@ function OrderList() {
               <Service>{order.washingMethod}</Service>
               <Price>{order.totalPrice.toLocaleString()}원</Price>
               <Status>
-                {order.orderStatus === "ORDER"
-                  ? "주문 완료"
-                  : order.orderStatus === "CASH"
-                  ? "결제 대기 중"
-                  : deliveryStatus[order.orderId] !== ""
+                {deliveryStatus && deliveryStatus[order.orderId]
                   ? deliveryStatus[order.orderId].deliveryStatus === "READY"
                     ? "배송 준비 중"
                     : deliveryStatus[order.orderId].deliveryStatus === "START"
-                    ? "배송 중"
-                    : deliveryStatus[order.orderId].deliveryStatus === "END"
-                    ? "배송 완료"
-                    : null
-                  : null}
+                      ? "배송 중"
+                      : deliveryStatus[order.orderId].deliveryStatus === "END"
+                        ? "배송 완료"
+                        : null
+                  : order.orderStatus === "ORDER"
+                    ? "주문 완료"
+                    : order.orderStatus === "CASH"
+                      ? "결제 대기 중"
+                      : null
+                }
               </Status>
 
+
               {deliveryStatus[order.orderId] &&
-              deliveryStatus[order.orderId].deliveryStatus === "END" ? (
+                deliveryStatus[order.orderId].deliveryStatus === "END" ? (
                 <StatusButton
                   onClick={openReviewWriteModal}
                   style={{ marginRight: "15px" }}
@@ -208,7 +210,7 @@ function OrderList() {
                   <FontAwesomeIcon icon={faPen} />
                   <p>리뷰 작성하기</p>
                 </StatusButton>
-              ) : order.orderStatus === "CASH" ? (
+              ) : order.orderStatus === "CASH" && !(deliveryStatus[order.orderId]) ? (
                 <StatusButton
                   onClick={() => {
                     paymentHandler(order);
@@ -218,16 +220,6 @@ function OrderList() {
                   <p>결제하기</p>
                 </StatusButton>
               ) : null}
-
-              {/* 리뷰 작성을 테스트 하기 위한 코드, 후에 삭제하기 */}
-              <StatusButton
-                onClick={openReviewWriteModal}
-                style={{ marginRight: "15px" }}
-              >
-                <FontAwesomeIcon icon={faPen} />
-                <p>리뷰 작성하기</p>
-              </StatusButton>
-              {/* 여기까지 리뷰 작성을 테스트 하기 위한 코드 */}
 
               <Modal
                 isOpen={isReviewWriteModalOpen}
@@ -254,6 +246,12 @@ const OrderListLayout = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 24px;
+  padding-left: 15%;
+  padding-right: 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
+  }
 `;
 
 const Title = styled.h3`
@@ -274,6 +272,10 @@ const Header = styled.header`
   font-weight: 500;
   border-bottom: 1px solid rgb(232, 234, 237);
   padding-bottom: 20px;
+  @media (max-width: 768px) {
+    font-size:14px;
+    font-weight:400;
+  }
 `;
 
 const List = styled.article`

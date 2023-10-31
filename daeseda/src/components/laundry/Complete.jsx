@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../common/Button";
 import laundry from "../../assets/images/laundry.png";
 import { useNavigate } from "react-router-dom";
-function Complete({pickupDate, addressRoad, addressDetail, deliveryLocation}) {
+function Complete({ pickupDate, addressRoad, addressDetail, deliveryLocation }) {
   const navigate = useNavigate();
   return (
     <CompleteLayout>
@@ -28,13 +28,13 @@ function Complete({pickupDate, addressRoad, addressDetail, deliveryLocation}) {
           <p>배송주소</p>
           <p>{addressRoad} {addressDetail}</p>
         </Row>
-        <Row style={{marginBottom:"20px"}}>
+        <Row style={{ marginBottom: "20px" }}>
           <p>수거/배송위치</p>
           <p>{deliveryLocation}</p>
         </Row>
-        <Button text="주문내역 확인하기" onClick={()=>{
+        <Button text="주문내역 확인하기" onClick={() => {
           navigate("/orderlist")
-        }}/>
+        }} />
       </Main>
     </CompleteLayout>
   );
@@ -84,7 +84,11 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 24px 100px;
+  padding: 24px 15%;
+    @media (max-width: 768px) {
+        padding-left:10px;
+        padding-right:10px;
+  }
 `;
 
 const Row = styled.div`
