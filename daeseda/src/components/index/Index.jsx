@@ -7,8 +7,6 @@ import Time from "../../assets/images/time.png";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/common/Footer";
 
-
-
 const BoxContainer = styled.div`
   display: flex;
   height: 565px;
@@ -17,15 +15,15 @@ const BoxContainer = styled.div`
   @media (max-width: 768px) {
     height: 300px;
     background: linear-gradient(45deg, #5d8df2, black);
-    margin:0 10px;
+    margin: 0 10px;
   }
 `;
 const Background = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   margin: 0 auto;
   margin-top: 100px;
-  margin-bottom:100px;
+  margin-bottom: 100px;
   @media (max-width: 768px) {
     margin-top: 70px;
   }
@@ -70,6 +68,7 @@ const Text2 = styled.p`
   font-weight: 700;
   text-align: center;
   margin-top: 20px;
+  margin-bottom:20px;
 `;
 
 const Box = styled.div`
@@ -108,9 +107,9 @@ const Button = styled.button`
   @media (max-width: 768px) {
     margin: 10px;
   }
-  &:hover{
-    background-color:rgb(93,141,242);
-    border:none;
+  &:hover {
+    background-color: rgb(93, 141, 242);
+    border: none;
   }
 `;
 
@@ -121,6 +120,7 @@ const P = styled.p`
 const ReviewWrap = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 `;
 
 const Index = () => {
@@ -129,8 +129,7 @@ const Index = () => {
     if (token) {
       // 토큰이 존재하는 경우, 로그인 상태로 설정
       setIsLoggedIn(true);
-    }
-    else{
+    } else {
       setIsLoggedIn(false);
     }
   }, []);
@@ -142,11 +141,11 @@ const Index = () => {
         <Text>대신세탁해드립니다</Text>
         <Text>당신의 편리한 일상 생활을 도와드리겠습니다</Text>
         <ButtonWrap>
-        {isLoggedIn ? (
-                <Button onClick={() => navigate("laundry")}>신청하기</Button>
-              ) : (
-                <Button onClick={() => navigate("login")}>신청하기</Button>
-              )}
+          {isLoggedIn ? (
+            <Button onClick={() => navigate("laundry")}>신청하기</Button>
+          ) : (
+            <Button onClick={() => navigate("login")}>신청하기</Button>
+          )}
           <Button onClick={() => navigate("userguide")}>이용방법</Button>
         </ButtonWrap>
       </Background>
@@ -191,7 +190,7 @@ const Index = () => {
           <Review />
         </Content>
       </ReviewWrap>
-      <Footer/>
+      <Footer />
     </BoxContainer>
   );
 };

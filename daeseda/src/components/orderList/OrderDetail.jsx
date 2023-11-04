@@ -9,9 +9,7 @@ function OrderDetail({ order, formatDate }) {
       </Row>
       <Row>
         <RowTitle>배송주소</RowTitle>
-        <p>
-          {order.address}
-        </p>
+        <p>{order.address}</p>
       </Row>
       <Row>
         <RowTitle>수거날짜</RowTitle>
@@ -20,24 +18,13 @@ function OrderDetail({ order, formatDate }) {
         <p>{formatDate(order.pickupDate)}</p>
       </Row>
       <Row>
-        <RowTitle>주문상태</RowTitle>
-        <Half>
-          {order.orderStatus === "ORDER"
-            ? "주문 완료"
-            : order.orderStatus === "CASH"
-            ? "결제 대기 중"
-            : order.orderStatus === "COMPLETE"
-            ? "결제 완료"
-            : order.orderStatus === "CANCEL"
-            ? "주문 취소"
-            : null}
-        </Half>
+        <RowTitle>세탁종류</RowTitle>
+
+        <Half>{order.washingMethod}</Half>
         <RowTitle>주문금액</RowTitle>
         <p>{order.totalPrice.toLocaleString()}원</p>
       </Row>
       <Row>
-        <RowTitle>세탁종류</RowTitle>
-        <Half>{order.washingMethod}</Half>
         <RowTitle>주문자명</RowTitle>
         <p>{order.user.userName}</p>
       </Row>

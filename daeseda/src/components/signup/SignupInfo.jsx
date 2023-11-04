@@ -48,7 +48,7 @@ const SignupInfo = () => {
   const [certificationText, setCertificationText] = useState("인증번호전송");
   const [certificationCheckText, setCertificationCheckText] = useState("인증하기");
   // 인증번호를 입력하는 란을 보여줄지 말지를 결정하는 state, 인증번호가 전송되면 true가 되고 인증번호 입력창이 생김
-  const [certificationNumberView, setCertificationNumberView] = useState(true);
+  const [certificationNumberView, setCertificationNumberView] = useState(false);
   const [certificationValidation, setCertificationValidation] = useState(false); // 이메일 인증이 완료되었는지 완료되지않았는지 상태를 저장
   const signupInfo = {
     userEmail: email,

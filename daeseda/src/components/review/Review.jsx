@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import review from "../../assets/images/review.png";
 import axios from "axios";
@@ -12,7 +12,6 @@ function Review() {
   const [reviews, setReviews] = useState([]);
   const [reviewCategory, setReviewCategory] = useState("");
   const groupSize = 5; //슬라이드당 다섯개 표현
-
   useEffect(() => {
     axios
       .get(`${serverUrl}/review/list`)
@@ -24,58 +23,45 @@ function Review() {
       });
   }, []);
 
-  const groupedReviews = [];
-  for (let i = 0; i < reviews.length; i += groupSize) {
-    groupedReviews.push(reviews.slice(i, i + groupSize));
-  }
+ 
 
-  function importAll(r) {
-    let images = {};
-    r.keys().forEach((item, index) => {
-      images[item.replace("./", "")] = r(item);
-    });
-    return images;
-  }
-  
-  const reviewImages = importAll(
-    require.context("../../assets/review", false, /\.(png|jpe?g|svg)$/)
-  );
+
+  // function importAll(r) {
+  //   let images = {};
+  //   r.keys().forEach((item, index) => {
+  //     images[item.replace("./", "")] = r(item);
+  //   });
+  //   return images;
+  // }
+
+  // const reviewImages = importAll(
+  //   require.context("../../assets/review", false, /\.(png|jpe?g|svg)$/)
+  // );
 
   function extractFileName(url) {
-    const parts = String(url).split('/');
+    const parts = String(url).split("/");
     return parts[parts.length - 1];
   }
 
   return (
-    <Carousel
-      showThumbs={false}
-      showArrows={false}
-      showStatus={false}
-      autoPlay={true}
-      dynamicHeight={false}
-      centerMode={false}
-      centerSlidePercentage={100}
-      infiniteLoop={true}
-      width={1500}
-    >
-      {groupedReviews.map((group, groupIndex) => (
-        <ReviewLayout key={groupIndex}>
-          {group.map((reviewData, index) => (
-            <ReviewArticle key={index}>
-              <ImgWrapper>
-                <Img
-                src={reviewImages[extractFileName(reviewData.imageUrl)]}
-                alt={extractFileName(reviewData.imageUrl)}
-                />
-
+    <DeliveryWrap>
+        {reviews.length === 0 ? (
+          <p>작성된 리뷰가 없습니다.</p>
+        ) : (
+          reviews.map((review) => (
+            <ReviewItem key={review.reviewId}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom:"10px" }}
+              >
                 <ReviewCategory
-                  reviewId={reviewData.reviewId}
+                  reviewId={review.reviewId}
                   serverUrl={serverUrl}
                 />
-                <Category>{reviewCategory}</Category>
-              </ImgWrapper>
+                <p>{review.reviewContent}</p>
+              </div>
+
               <Rating>
-                {Array(Math.round(reviewData.rating))
+                {Array(Math.round(review.rating))
                   .fill()
                   .map((_, i) => (
                     <FontAwesomeIcon
@@ -84,20 +70,16 @@ function Review() {
                       style={{ color: "#ffc700" }}
                     />
                   ))}
-                {Array(5 - Math.round(reviewData.rating))
+                {Array(5 - Math.round(review.rating))
                   .fill()
                   .map((_, i) => (
                     <FontAwesomeIcon key={i} icon={faStar} />
                   ))}
               </Rating>
-              <ReviewInfo>
-                <p>{reviewData.reviewContent}</p>
-              </ReviewInfo>
-            </ReviewArticle>
-          ))}
-        </ReviewLayout>
-      ))}
-    </Carousel>
+            </ReviewItem>
+          ))
+        )}
+      </DeliveryWrap>
   );
 }
 
@@ -149,7 +131,6 @@ const Img = styled.img`
 `;
 
 const Category = styled.p`
-  position: absolute;
   top: 10px;
   left: 10px;
   background-color: rgb(93, 141, 242);
@@ -167,6 +148,21 @@ const Rating = styled.div`
 
 const ReviewInfo = styled.div`
   gap: 2px;
+`;
+
+const DeliveryWrap = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin:0 10%;
+  justify-content:center;
+`;
+
+const ReviewItem = styled.li`
+  border: 1px solid rgb(232, 234, 237);
+  padding: 12px;
+  border-radius: 4px;
+  margin: 4px 0;
 `;
 
 export default Review;
