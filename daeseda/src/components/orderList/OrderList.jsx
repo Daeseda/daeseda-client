@@ -9,8 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
   faSackDollar,
-  faTruck,
-  faSpinner,
+  faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import OrderDetail from "./OrderDetail";
@@ -75,7 +74,7 @@ function OrderList() {
       });
   }, []);
 
-  // 결제하기
+  // 결제하기 테스트용
   function paymentHandler(order) {
     //난수 생성, 주문번호에 사용
     const array = new Uint32Array(1); // 32비트 정수를 생성
@@ -207,25 +206,7 @@ function OrderList() {
                   style={{ marginRight: "15px" }}
                 >
                   <FontAwesomeIcon icon={faPen} />
-                  <p>리뷰 작성하기</p>
-                </StatusButton>
-              ) : deliveryStatus[order.orderId] &&
-                deliveryStatus[order.orderId].deliveryStatus === "START" ? (
-                <StatusButton
-                  onClick={openOrderDetailModal}
-                  style={{ marginRight: "15px" }}
-                >
-                  <FontAwesomeIcon icon={faTruck} />
-                  <p>배송 조회</p>
-                </StatusButton>
-              ) : deliveryStatus[order.orderId] &&
-                deliveryStatus[order.orderId].deliveryStatus === "READY" ? (
-                <StatusButton
-                  onClick={openOrderDetailModal}
-                  style={{ marginRight: "15px" }}
-                >
-                  <FontAwesomeIcon icon={faTruck} />
-                  <p>잠시 후 배송 시작!</p>
+                  <p>리뷰작성</p>
                 </StatusButton>
               ) : order.orderStatus === "CASH" &&
                 !deliveryStatus[order.orderId] ? (
@@ -237,12 +218,12 @@ function OrderList() {
                   <FontAwesomeIcon icon={faSackDollar} />
                   <p>결제하기</p>
                 </StatusButton>
-              ) : order.orderStatus === "ORDER" ? (
+              ) : (
                 <StatusButton>
-                  <FontAwesomeIcon icon={faSpinner} />
-                  <p>접수 대기 중</p>
+                  <FontAwesomeIcon icon={faCircleCheck} />
+                  <p>접수대기</p>
                 </StatusButton>
-              ) : null}
+              )}
 
               <Modal
                 isOpen={isReviewWriteModalOpen}
@@ -269,8 +250,7 @@ const OrderListLayout = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 24px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 0 100px;
   @media (max-width: 768px) {
     padding-left: 10px;
     padding-right: 10px;
@@ -309,34 +289,34 @@ const List = styled.article`
 `;
 
 const Number = styled.p`
-  width: 10%;
+  width: 70px;
   text-align: center;
 `;
 
 const Date = styled.p`
-  width: 15%;
+  width: 150px;
   text-align: center;
 `;
 
 const Service = styled.p`
-  width: 12%;
+  width: 150px;
   text-align: center;
 `;
 
 const Price = styled.p`
-  width: 12%;
+  width: 150px;
   text-align: center;
 `;
 
 const Status = styled.p`
-  width: 12%;
+  width: 150px;
   text-align: center;
 `;
 
 const StatusButton = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   box-sizing: border-box;
   cursor: pointer;
   color: red;

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import {faRecycle, faShower, faPhone} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHandsBubbles,
+  faQuestion,
+  faHeadset,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   background: #5d8df2;
@@ -18,14 +20,10 @@ const Container = styled.div`
     font-size: 14px;
   }
 `;
-const Image = styled.img`
-  width: 30%;
-  height: 50px;
-`;
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
-  margin:0 10px;
+  margin: 0 20px;
 `;
 const LogoImage = styled.img`
   width: 50px;
@@ -36,19 +34,14 @@ const Leftcontent = styled.div`
   padding: 10px;
 `;
 const Rightcontent = styled.div`
-margin-top:20px;
   display: flex;
-  align-items:flex-start;
   gap: 20px;
-  font-size:18px;
-  @media (max-width: 768px) {
-    flex-direction:column;
-    margin-bottom:20px;
-  }
+  margin-top: 50px;
 `;
 const NavItem = styled.li`
   display: flex;
-  align-items:center;
+  align-items: center;
+  gap: 5px;
 `;
 const LogoLink = styled(Link)`
   @media (max-width: 768px) {
@@ -60,7 +53,6 @@ const NavLink = styled.p`
   text-decoration: none;
   color: white;
   font-size: 15px;
-  margin-left:5px;
   &:hover {
     text-decoration: underline;
   }
@@ -91,13 +83,12 @@ const Footer = () => {
             <p>대신 세탁해드립니다</p>
           </LogoLink>
           <p>㈜대세다</p>
-          <p>daeseda1@gmail.com</p>
           <p>©Daeseda. Corp</p>
         </Leftcontent>
 
         <Rightcontent>
           <NavItem>
-            <FontAwesomeIcon icon={faShower} />
+            <FontAwesomeIcon icon={faHandsBubbles} />
             {isLoggedIn ? (
               <NavLink onClick={linkHandler("laundry")}>신청하기</NavLink>
             ) : (
@@ -107,22 +98,13 @@ const Footer = () => {
             )}
           </NavItem>
           <NavItem>
-            <FontAwesomeIcon icon={faRecycle} />
+            <FontAwesomeIcon icon={faQuestion} />
             <NavLink onClick={linkHandler("userGuide")}>이용방법</NavLink>
           </NavItem>
           <NavItem>
-          <FontAwesomeIcon icon={faPhone} />
+            <FontAwesomeIcon icon={faHeadset} />
             <NavLink onClick={linkHandler("cscenter")}>고객센터</NavLink>
           </NavItem>
-
-          <NavItem>
-          <FontAwesomeIcon icon={faGithub} />
-            <NavLink onClick={()=>{
-              window.open("https://github.com/Daeseda",'_blank')
-            }}>GitHub</NavLink>
-          </NavItem>
-
-
         </Rightcontent>
       </Content>
     </Container>

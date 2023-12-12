@@ -131,7 +131,7 @@ const Question = ({ write, mypage }) => {
           <h3>자유게시판</h3>
         )}
       </Title>
-      {/* <Search>
+      <Search>
         <select
           style={{ textAlign: "center", marginRight: "5px", outline: "none" }}
         >
@@ -148,7 +148,7 @@ const Question = ({ write, mypage }) => {
           style={{ outline: "none" }}
         ></input>
         <Button text={"검색"}></Button>
-      </Search> */}
+      </Search>
       <Content>
         <Wrap>
           <BoardRowLayout>

@@ -94,14 +94,14 @@ const Notice = () => {
       <Title>
         <h3>공지사항</h3>
       </Title>
-      {/* <Search>
+      <Search>
         <input
           type="text"
           placeholder="Search"
           style={{ outline: "none" }}
         ></input>
         <Button text={"검색"}></Button>
-      </Search> */}
+      </Search>
       <Content>
         <Wrap>
           <BoardRowLayout>
