@@ -22,42 +22,45 @@ import UserGuidePage from "./pages/userGuidePage/index";
 import AdminPage from "./pages/adminPage/index";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<IndexPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/laundry" element={<LaundryPage />} />
-        <Route path="/laundry/order" element={<OrderPage />} />
-        <Route path="/myinfo" element={<MyPage />} />
-        <Route
-          path="/myinfo/add-delivery-address"
-          element={<AddDeliveryAddressPage />}
-        />
-        <Route
-          path="/myinfo/edit-delivery-address/:addressId"
-          element={<EditDeliveryAddressPage />}
-        />
-        <Route path="/myinfo/:id" element={<QuestionUpdatePage/>} />
-        <Route path="/orderlist" element={<OrderListPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/signup/info" element={<SignupInfoPage />} />
-        <Route path="/signup/success" element={<SignupSuccessPage />} />
-        <Route path="/cscenter" element={<CscenterPage />} />
-        <Route
-          path="/cscenter/question-write"
-          element={<QuestionWritePage />}
-        />
-        <Route
-          path="/cscenter/question-write/success"
-          element={<QuestionWriteSuccessPage />}
-        />
-        <Route path="/cscenter/:id" element={<QuestionDetailPage question={true}/>} />
-        <Route path="/cscenter/notice/:id" element={<QuestionDetailPage/>} />
-        <Route path="/cscenter/faq/:id" element={<QuestionDetailPage/>} />
-        <Route path="/userguide" element={<UserGuidePage/>} />
-        <Route path="/admin" element={<AdminPage />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/laundry" element={<LaundryPage />} />
+          <Route path="/laundry/order" element={<OrderPage />} />
+          <Route path="/myinfo" element={<MyPage />} />
+          <Route
+            path="/myinfo/add-delivery-address"
+            element={<AddDeliveryAddressPage />}
+          />
+          <Route
+            path="/myinfo/edit-delivery-address/:addressId"
+            element={<EditDeliveryAddressPage />}
+          />
+          <Route path="/myinfo/:id" element={<QuestionUpdatePage />} />
+          <Route path="/orderlist" element={<OrderListPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/signup/info" element={<SignupInfoPage />} />
+          <Route path="/signup/success" element={<SignupSuccessPage />} />
+          <Route path="/cscenter" element={<CscenterPage />} />
+          <Route
+            path="/cscenter/question-write"
+            element={<QuestionWritePage />}
+          />
+          <Route
+            path="/cscenter/question-write/success"
+            element={<QuestionWriteSuccessPage />}
+          />
+          <Route
+            path="/cscenter/:id"
+            element={<QuestionDetailPage question={true} />}
+          />
+          <Route path="/cscenter/notice/:id" element={<QuestionDetailPage />} />
+          <Route path="/cscenter/faq/:id" element={<QuestionDetailPage />} />
+          <Route path="/userguide" element={<UserGuidePage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </BrowserRouter>
   );
 }
 

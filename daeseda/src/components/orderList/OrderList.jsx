@@ -14,7 +14,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import OrderDetail from "./OrderDetail";
 import DeliveryDetail from "./DeliveryDetail";
-
 function OrderList() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
 
@@ -218,12 +217,7 @@ function OrderList() {
                   <FontAwesomeIcon icon={faSackDollar} />
                   <p>결제하기</p>
                 </StatusButton>
-              ) : (
-                <StatusButton>
-                  <FontAwesomeIcon icon={faCircleCheck} />
-                  <p>접수대기</p>
-                </StatusButton>
-              )}
+              ) : null}
 
               <Modal
                 isOpen={isReviewWriteModalOpen}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import InfoRow from "../common/InfoRow";
 import axios from "axios";
 import SmallButton from "../common/SmallButton";
-
+import { useDispatch, useSelector } from "react-redux";
 function MyInfo() {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
@@ -16,24 +16,14 @@ function MyInfo() {
   const token = localStorage.getItem("token");
   const serverUrl = process.env.REACT_APP_SERVER_URL;
 
+  const userInfo = useSelector((state) => state);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (token) {
-      axios
-        .get(`${serverUrl}/users/myInfo`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          const userData = response.data;
-          setUser(userData);
-          setInitialName(userData.userName);
-          setInitialNickname(userData.userNickname);
-          setInitialPhone(userData.userPhone);
-        })
-        .catch((error) => {
-          console.error("회원 정보를 불러오는데 실패했습니다.", error);
-        });
+      setUser(userInfo);
+      setInitialName(userInfo.userName);
+      setInitialNickname(userInfo.userNickname);
+      setInitialPhone(userInfo.userPhone);
     }
   }, [
     token,
@@ -62,6 +52,7 @@ function MyInfo() {
             .then((response) => {
               if (response.status === 200) {
                 setInitialName(name);
+                dispatch({ type: "nameUpdate", newName: name });
               }
             })
             .catch((error) => {
@@ -84,6 +75,7 @@ function MyInfo() {
             .then((response) => {
               if (response.status === 200) {
                 setInitialNickname(nickname);
+                dispatch({ type: "nicknameUpdate", newNickname: nickname });
               }
             })
             .catch((error) => {
@@ -106,6 +98,7 @@ function MyInfo() {
             .then((response) => {
               if (response.status === 200) {
                 setInitialPhone(phone);
+                dispatch({ type: "phoneUpdate", newPhone: phone });
               }
             })
             .catch((error) => {
@@ -201,9 +194,9 @@ const EditDeleteButton = styled.button`
 `;
 
 const WhiteButton = styled.p`
-background-color: white;
-border:1px solid rgb(93,141,242);
-  color: rgb(93,141,242);
+  background-color: white;
+  border: 1px solid rgb(93, 141, 242);
+  color: rgb(93, 141, 242);
   font-size: 14px;
   padding: 4px 8px;
   border-radius: 4px;

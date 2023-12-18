@@ -9,7 +9,6 @@ import Question from "../../components/cscenter/Question";
 import MyReview from "../../components/mypage/MyReview";
 function MyPage() {
   const [selectedItemId, setSelectedItemId] = useState("info");
-
   return (
     <div>
       <Header />
@@ -19,7 +18,7 @@ function MyPage() {
           setSelectedItemId={setSelectedItemId}
         />
         {selectedItemId === "info" ? (
-          <MyInfo />
+          <MyInfo/>
         ) : selectedItemId === "delivery" ? (
           <DeliveryAddress />
         ) : selectedItemId === "withdrawal" ? <Withdraw/> : selectedItemId === "review" ? (

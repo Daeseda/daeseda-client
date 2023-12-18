@@ -4,7 +4,7 @@ import LoginIcon from "../../assets/images/login.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import WarningMessage from "../common/WarningMessage";
-
+import { useDispatch } from "react-redux";
 const LoginIndex = styled.div`
   text-align: center;
   display: flex;
@@ -44,7 +44,6 @@ const LoginButton = styled.button`
   border: 1px ridge rgb(232, 234, 237);
   border-radius: 3px;
   outline: none;
-  /* margin-top: 20px; */
 `;
 
 const BottomButton = styled.div`
@@ -54,6 +53,7 @@ const BottomButton = styled.div`
 `;
 
 const Login = () => {
+  const dispatch = useDispatch();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,7 +71,7 @@ const Login = () => {
     userEmail: email,
     userPassword: password,
   };
-  function loginHandler() {
+  async function loginHandler() {
     if (email === "") {
       setWarningMessageView(true);
       setWarningMessageText("이메일을 입력하세요");
@@ -79,20 +79,37 @@ const Login = () => {
       setWarningMessageView(true);
       setWarningMessageText("비밀번호를 입력하세요");
     } else {
-      axios
-        .post(`${serverUrl}/users/authenticate`, loginInfo, {
+      try {
+        // 로그인 요청
+        const response = await axios.post(`${serverUrl}/users/authenticate`, loginInfo, {
           withCredentials: true,
-        })
-        .then(function (response) {
-          navigate("/");
-          localStorage.setItem("token", response.data.token); //token 이라는 이름으로 token값을 localStorage에 저장
-        })
-        .catch(function (error) {
-          setWarningMessageView(true);
-          setWarningMessageText("로그인에 실패하였습니다");
         });
+
+        // 로그인 성공 시 사용자 정보 요청
+        const userInfoResponse = await axios.get(`${serverUrl}/users/myInfo`, {
+          headers: {
+            Authorization: `Bearer ${response.data.token}`,
+          },
+        });
+        const userInfo = userInfoResponse.data;
+         // useSetRecoilState로 user 값을 설정
+        //  setRecoilUser({
+        //   login: true,
+        //   email: userInfo.userEmail,
+        //   name: userInfo.userName,
+        //   nickname: userInfo.userNickname,
+        //   phone: userInfo.userPhone,
+        // });
+        dispatch({type:"login", userInfo:userInfo})
+        navigate("/");
+        localStorage.setItem("token", response.data.token);
+      } catch (error) {
+        setWarningMessageView(true);
+        setWarningMessageText("로그인에 실패하였습니다");
+      }
     }
   }
+  
   return (
     <LoginIndex>
       <Image src={LoginIcon} />
