@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPen,
   faSackDollar,
-  faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import OrderDetail from "./OrderDetail";
 import DeliveryDetail from "./DeliveryDetail";
 function OrderList() {

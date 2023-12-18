@@ -1,17 +1,27 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 function OrderDetail({ order, formatDate }) {
+  const userNickname = useSelector((state) => state.userNickname);
+  const [nickname, setNickname] = useState("");
+  useEffect(() => {
+    setNickname(userNickname);
+  }, []);
+
   return (
     <Layout>
-      <Title>{order.user.userNickname}님의 주문 내역</Title>
+      {nickname !== "" ? (
+        <Title>{order.user.userNickname}님의 주문 내역</Title>
+      ) : (
+        <Title>{nickname}님의 주문 내역</Title>
+      )}
       <Row>
         <RowTitle>주문번호</RowTitle>
         <p>{order.orderId}</p>
       </Row>
       <Row>
         <RowTitle>배송주소</RowTitle>
-        <p>
-          {order.address}
-        </p>
+        <p>{order.address}</p>
       </Row>
       <Row>
         <RowTitle>수거날짜</RowTitle>

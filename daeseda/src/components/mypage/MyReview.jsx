@@ -3,28 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Review() {
   const [reviews, setReviews] = useState([]);
   const [user, setUser] = useState("");
   const token = localStorage.getItem("token");
   const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const userInfo = useSelector((state) => state);
   useEffect(() => {
     if (token) {
-      axios
-        .get(`${serverUrl}/users/myInfo`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          const userData = response.data;
-          setUser(userData);
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error("회원 정보를 불러오는데 실패했습니다.", error);
-        });
+      setUser(userInfo);
     }
   }, [token]);
 

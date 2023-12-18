@@ -5,6 +5,7 @@ import Check from "../common/Check";
 import { useNavigate } from "react-router-dom";
 import WarningMessage from "../common/WarningMessage";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Main = styled.div`
   display: flex;
@@ -43,28 +44,14 @@ const Withdraw = () => {
   const [user, setUser] = useState("");
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
+  const userInfo = useSelector((state) => state);
 
   useEffect(() => {
     if (token) {
-      axios
-        .get(`${serverUrl}/users/myInfo`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          const userData = response.data;
-          setUser(userData);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("회원 정보를 불러오는데 실패했습니다.", error);
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
+      setUser(userInfo);
     }
   }, [token]);
+
 
   //이용약관을 동의했는지 state값으로 유지
   const [firstTerms, setFirstTerms] = useState(false);
